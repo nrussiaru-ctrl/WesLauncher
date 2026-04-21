@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>WesLauncher — Элегантный старт в Minecraft</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 20%, #0A192F, #07101F);
+            font-family: 'Inter', sans-serif;
+            color: #E8F0FE;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* soft scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A192F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2C5F8A;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.7rem;
+            text-align: center;
+            margin-bottom: 56px;
+            background: linear-gradient(135deg, #FFFFFF, #8BB3E0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* glassmorphic cards without neon */
+        .glass-card {
+            background: rgba(18, 28, 40, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 98, 148, 0.35);
+            border-radius: 32px;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 44px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: #1E4A76;
+            color: white;
+            box-shadow: 0 8px 18px rgba(0, 32, 64, 0.3);
+        }
+        .btn-primary:hover {
+            background: #2C628B;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 48, 88, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #3A6B92;
+            color: #CFE4FF;
+        }
+        .btn-outline:hover {
+            background: rgba(44, 98, 139, 0.2);
+            border-color: #6A9CC9;
+            transform: translateY(-2px);
+        }
+        .btn-disabled {
+            background: #1F2E3E;
+            color: #7F8FA4;
+            cursor: not-allowed;
+            opacity: 0.7;
+            pointer-events: none;
+            border: none;
+        }
+
+        /* header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 16, 31, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(56, 98, 148, 0.3);
+            padding: 18px 0;
+        }
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.7rem;
+            font-weight: 800;
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, #1F6392, #124263);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #CADEFF;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #91B9E6;
+        }
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #BED6FF;
+        }
+
+        /* hero */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-content h1 {
+            font-size: 3.8rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .hero-gradient {
+            background: linear-gradient(125deg, #FFFFFF, #9AC2E8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #B8D0F0;
+            margin-bottom: 40px;
+            max-width: 540px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .hero-preview {
+            flex: 0.9;
+            background: rgba(10, 25, 47, 0.6);
+            border-radius: 36px;
+            border: 1px solid rgba(70, 120, 170, 0.5);
+            padding: 20px;
+            box-shadow: 0 25px 40px -18px rgba(0,0,0,0.6);
+        }
+        .mockup-window {
+            background: #0A1425;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #2C5170;
+        }
+        .mockup-bar {
+            background: #111C2E;
+            padding: 14px 20px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #2C5170;
+        }
+        .mockup-dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #3A7CA5;
+        }
+        .mockup-content {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mockup-line {
+            height: 10px;
+            background: #1E3852;
+            border-radius: 20px;
+            width: 100%;
+        }
+        .mockup-line.accent {
+            background: #2F73A3;
+            width: 65%;
+        }
+
+        /* features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 36px;
+            margin-top: 24px;
+        }
+        .feature-card {
+            background: rgba(18, 30, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 34px 20px;
+            text-align: center;
+            border: 1px solid rgba(60, 110, 150, 0.3);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(26, 44, 65, 0.8);
+            border-color: #4F85B0;
+            box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.4);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #5E9ACF;
+            margin-bottom: 22px;
+        }
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+        }
+        .feature-card p {
+            color: #B4CBE8;
+        }
+
+        /* downloads */
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 34px;
+            margin-bottom: 36px;
+        }
+        .download-card {
+            background: rgba(18, 30, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 36px;
+            padding: 32px 20px;
+            text-align: center;
+            border: 1px solid rgba(70, 120, 170, 0.4);
+            transition: all 0.25s;
+        }
+        .download-card:hover {
+            border-color: #5F9ED0;
+            transform: translateY(-5px);
+        }
+        .os-icon {
+            font-size: 3.2rem;
+            color: #7AADD9;
+            margin-bottom: 20px;
+        }
+        .version-tag {
+            background: rgba(47, 115, 163, 0.25);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin: 14px 0;
+            font-weight: 500;
+            color: #C0DFFF;
+        }
+        .file-size {
+            color: #A0BBDA;
+            margin-bottom: 28px;
+        }
+        .btn-download {
+            background: #1C405E;
+            color: white;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-download.active {
+            background: #1E6A9F;
+        }
+        .btn-download.active:hover {
+            background: #2F80B0;
+            transform: translateY(-2px);
+        }
+        .github-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .github-link a {
+            color: #9ABFE5;
+            text-decoration: none;
+            border-bottom: 1px solid #5A8FB5;
+        }
+
+        /* gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 30px;
+        }
+        .screenshot-card {
+            background: rgba(18, 30, 45, 0.6);
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #355F80;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .screenshot-card:hover {
+            transform: scale(1.02);
+            border-color: #6A9CC9;
+        }
+        .screenshot-img {
+            background: #0C1A2A;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 14px;
+            color: #80B4E0;
+            font-size: 2.6rem;
+            border-bottom: 1px solid #2C5578;
+        }
+        .screenshot-card p {
+            padding: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 85vw;
+            background: #0C1C2C;
+            border-radius: 40px;
+            padding: 16px;
+            border: 1px solid #4C7DA6;
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 28px;
+            right: 38px;
+            font-size: 2.2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* faq */
+        .faq-list {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: rgba(16, 30, 48, 0.65);
+            border: 1px solid #2B5578;
+            border-radius: 28px;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 22px 28px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .faq-question:hover {
+            background: rgba(48, 96, 135, 0.2);
+        }
+        .faq-question i {
+            color: #6D9FCC;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.2s;
+            color: #C2D6F0;
+            border-top: 0px solid transparent;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 28px 22px 28px;
+            border-top: 1px solid #2F6085;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* footer */
+        footer {
+            border-top: 1px solid rgba(58, 108, 148, 0.4);
+            padding: 50px 0 32px;
+            background: #071222;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 36px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #B1CEF0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #7EB1DC;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 42px;
+            font-size: 0.85rem;
+            color: #7A93AF;
+        }
+
+        /* fade animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* responsiveness */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #071222e0;
+                backdrop-filter: blur(20px);
+                padding: 28px;
+                gap: 24px;
+                border-bottom: 1px solid #2C5A7F;
+                z-index: 99;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 70px 0;
+            }
+        }
+        @media (max-width: 550px) {
+            .container {
+                padding: 0 20px;
+            }
+            .btn {
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <div class="logo">
+            <div class="logo-icon">W</div>
+            <span>WesLauncher</span>
+        </div>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Главная</a>
+            <a href="#features">Особенности</a>
+            <a href="#downloads">Скачать</a>
+            <a href="#faq">FAQ</a>
+            <a href="#downloads" class="btn btn-primary" style="padding: 8px 22px;">Скачать</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="home">
+        <div class="container hero">
+            <div class="hero-content">
+                <h1><span class="hero-gradient">WesLauncher</span><br>Глубокий опыт в Minecraft</h1>
+                <p>Мощный, элегантный лаунчер с полным контролем версий, модов и скинов. Погружайся в игру без границ.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="winHeroBtn"><i class="fab fa-windows"></i> Скачать для Windows</button>
+                    <a href="#downloads" class="btn btn-outline">Другие платформы →</a>
+                </div>
+            </div>
+            <div class="hero-preview">
+                <div class="mockup-window">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot"></div>
+                        <div class="mockup-dot"></div>
+                        <div class="mockup-dot"></div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-line"></div>
+                        <div class="mockup-line accent"></div>
+                        <div class="mockup-line"></div>
+                        <div class="mockup-line" style="width: 55%;"></div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 18px; color:#A2BFE0;">Чистый интерфейс, полная свобода</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2>Почему WesLauncher</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Мгновенный запуск</h3>
+                    <p>Оптимизированные ассеты и быстрая загрузка даже на старых ПК.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-cubes"></i></div>
+                    <h3>Все версии Minecraft</h3>
+                    <p>От ранних Alpha до снапшотов, Forge и Fabric — автоустановка.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <h3>Управление модами</h3>
+                    <p>Встроенный менеджер с поддержкой сборок и удобной сортировкой.</p>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Гибкая Java</h3>
+                    <p>Автопоиск Java, ручная настройка ОЗУ и аргументов запуска.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloads">
+        <div class="container">
+            <h2>Загрузите WesLauncher</h2>
+            <div class="downloads-grid">
+                <div class="download-card fade-up" data-os="win">
+                    <div class="os-icon"><i class="fab fa-windows"></i></div>
+                    <h3>Windows</h3>
+                    <div class="version-tag">v1.0.0</div>
+                    <div class="file-size">84 MB · .exe</div>
+                    <button class="btn btn-download active" id="winDownloadBtn"><i class="fas fa-download"></i> Скачать .exe</button>
+                </div>
+                <div class="download-card fade-up" data-os="mac">
+                    <div class="os-icon"><i class="fab fa-apple"></i></div>
+                    <h3>macOS</h3>
+                    <div class="version-tag">в разработке</div>
+                    <div class="file-size">—</div>
+                    <button class="btn btn-download btn-disabled" disabled><i class="fas fa-clock"></i> Скоро</button>
+                </div>
+                <div class="download-card fade-up" data-os="linux">
+                    <div class="os-icon"><i class="fab fa-linux"></i></div>
+                    <h3>Linux</h3>
+                    <div class="version-tag">будущий релиз</div>
+                    <div class="file-size">—</div>
+                    <button class="btn btn-download btn-disabled" disabled><i class="fas fa-hourglass-half"></i> В планах</button>
+                </div>
+            </div>
+            <div class="github-link">
+                <a href="#"><i class="fab fa-github"></i> Все версии, портативные сборки и исходный код</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Интерфейс в деталях</h2>
+            <div class="gallery">
+                <div class="screenshot-card fade-up" data-screen="1">
+                    <div class="screenshot-img"><i class="fas fa-layer-group"></i><i class="fas fa-gamepad"></i></div>
+                    <p>Выбор профиля и версии Minecraft</p>
+                </div>
+                <div class="screenshot-card fade-up" data-screen="2">
+                    <div class="screenshot-img"><i class="fas fa-puzzle-piece"></i><i class="fas fa-list"></i></div>
+                    <p>Менеджер модов и сборок</p>
+                </div>
+                <div class="screenshot-card fade-up" data-screen="3">
+                    <div class="screenshot-img"><i class="fas fa-sliders-h"></i><i class="fas fa-chart-line"></i></div>
+                    <p>Настройки памяти и Java</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <h2>Ответы на вопросы</h2>
+            <div class="faq-list">
+                <div class="faq-item fade-up">
+                    <div class="faq-question">Нужно ли покупать Minecraft? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Нет, WesLauncher поддерживает как лицензионные, так и пиратские версии. Играйте без ограничений.</div>
+                </div>
+                <div class="faq-item fade-up">
+                    <div class="faq-question">Как установить сборку модов? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Перетащите ZIP-архив с модами в окно лаунчера — автоматическая установка и активация.</div>
+                </div>
+                <div class="faq-item fade-up">
+                    <div class="faq-question">Безопасен ли лаунчер? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Полностью открытый исходный код, независимые проверки на VirusTotal. Ваши данные не собираются.</div>
+                </div>
+                <div class="faq-item fade-up">
+                    <div class="faq-question">Системные требования <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Windows 10/11, 4+ ГБ ОЗУ. Для macOS и Linux поддержка появится позже.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo" style="font-weight: 600;">WesLauncher</div>
+            <div class="footer-links">
+                <a href="https://discord.gg/uVt7EvtUcj" target="_blank" rel="noopener"><i class="fab fa-discord"></i> Discord</a>
+                <a href="https://t.me/wesnallauncher" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Поддержка</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 WesLauncher. Не является официальным продуктом Mojang. Minecraft — торговая марка Mojang AB.
+        </div>
+    </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <div class="lightbox-content" id="lightboxInner">
+        <div style="text-align:center; padding:30px;"><i class="fas fa-image" style="font-size: 3rem;"></i><p style="margin-top:20px;">Демо-скриншот интерфейса</p></div>
+    </div>
+</div>
+
+<script>
+    // mobile nav
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinksDiv = document.getElementById('navLinks');
+    mobileBtn.addEventListener('click', () => {
+        navLinksDiv.classList.toggle('mobile-open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navLinksDiv.classList.remove('mobile-open'));
+    });
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#") return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // windows download demo
+    const winBtn1 = document.getElementById('winDownloadBtn');
+    const winHero = document.getElementById('winHeroBtn');
+    const winHandler = () => alert('Скачивание WesLauncher для Windows (демо-версия). Установщик будет доступен в ближайшее время.');
+    if (winBtn1) winBtn1.addEventListener('click', winHandler);
+    if (winHero) winHero.addEventListener('click', winHandler);
+
+    // lightbox gallery
+    const lightbox = document.getElementById('lightbox');
+    const closeLight = document.querySelector('.close-lightbox');
+    const lightboxInner = document.getElementById('lightboxInner');
+    const screenCards = document.querySelectorAll('.screenshot-card');
+    const screenContent = {
+        1: { title: 'Выбор версии Minecraft', desc: 'Главный экран: все версии, снэпшоты, Forge/Fabric.' },
+        2: { title: 'Менеджер модов', desc: 'Удобный список модов, включение/отключение и сортировка.' },
+        3: { title: 'Настройки производительности', desc: 'Выделение ОЗУ, путь к Java, дополнительные параметры.' }
+    };
+    screenCards.forEach((card, idx) => {
+        const key = (idx+1).toString();
+        card.addEventListener('click', () => {
+            const data = screenContent[key] || { title: 'Интерфейс', desc: 'Современный лаунчер WesLauncher' };
+            lightboxInner.innerHTML = `
+                <div style="text-align: center; padding: 28px;">
+                    <i class="fas fa-window-maximize" style="font-size: 3rem; color:#7CB0DC;"></i>
+                    <h3 style="margin: 20px 0 10px;">${data.title}</h3>
+                    <p style="color:#CCE2FF;">${data.desc}</p>
+                    <div style="background: #0F253B; border-radius: 28px; padding: 28px; margin-top: 18px;">
+                        <i class="fas fa-image" style="font-size: 2.5rem;"></i>
+                        <p style="margin-top: 12px;">✨ Превью интерфейса</p>
+                    </div>
+                </div>
+            `;
+            lightbox.classList.add('active');
+        });
+    });
+    closeLight.addEventListener('click', () => lightbox.classList.remove('active'));
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
+
+    // accordion FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const q = item.querySelector('.faq-question');
+        q.addEventListener('click', () => {
+            const active = item.classList.contains('active');
+            faqItems.forEach(i => i.classList.remove('active'));
+            if (!active) item.classList.add('active');
+        });
+    });
+
+    // scroll fade observer
+    const faders = document.querySelectorAll('.fade-up');
+    const appearObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('appear');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    faders.forEach(el => appearObserver.observe(el));
+    // quick trigger in case already visible
+    setTimeout(() => {
+        faders.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 80) el.classList.add('appear');
+        });
+    }, 150);
+
+    // detect OS to highlight Windows card
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf('Win') !== -1) {
+        const winCard = document.querySelector('.download-card[data-os="win"]');
+        if (winCard) {
+            let badge = document.createElement('div');
+            badge.innerText = 'Рекомендуется';
+            badge.style.background = '#1F6392';
+            badge.style.borderRadius = '40px';
+            badge.style.padding = '4px 14px';
+            badge.style.fontSize = '0.7rem';
+            badge.style.display = 'inline-block';
+            badge.style.marginBottom = '10px';
+            winCard.querySelector('h3').insertAdjacentElement('beforebegin', badge);
+        }
+    }
+</script>
+</body>
+</html>
