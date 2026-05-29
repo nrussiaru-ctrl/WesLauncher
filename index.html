@@ -2,35 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gavans Squad — Brawl Stars Club</title>
-    <!-- Material Symbols для иконок -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>WesDes — инструменты для разработчиков Minecraft серверов</title>
+    <!-- Google Fonts + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --surface: #ffffff;
-            --surface-alt: #f5f0e8;
-            --text: #2c2416;
-            --text-secondary: #6b5e4a;
-            --gold: #c8963e;
-            --gold-light: #e0c078;
-            --gold-dark: #8b5e2b;
-            --blue: #3a5a8c;
-            --blue-light: #5b7fb4;
-            --blue-dark: #1e3a5f;
-            --red-accent: #b8453a;
-            --border: #e5ddd0;
-            --shadow-sm: 0 1px 3px rgba(44, 36, 22, 0.06);
-            --shadow-md: 0 4px 16px rgba(44, 36, 22, 0.1);
-            --shadow-lg: 0 8px 32px rgba(44, 36, 22, 0.12);
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --diagonal-cut: 20px;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -38,841 +15,578 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-image: radial-gradient(ellipse at 50% 0%, rgba(200, 150, 62, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 100%, rgba(58, 90, 140, 0.04) 0%, transparent 50%);
-            /* Запрет выделения текста на всём сайте */
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0B0E1A, #03050C);
+            color: #EFF3FC;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
-        /* Разрешаем выделение только для тега клуба */
-        .tag-display,
-        .tag-display *,
-        .tag-bottom,
-        .tag-bottom *,
-        .tag-text {
-            user-select: text;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
+        /* декоративный глобальный контейнер */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 1rem;
         }
 
-        /* ========== HEADER / NAV ========== */
+        /* HEADER */
         .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(250, 247, 242, 0.85);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border);
-            transition: var(--transition);
-        }
-        .header.scrolled {
-            box-shadow: var(--shadow-sm);
-        }
-        .header-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 14px 24px;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: space-between;
-            gap: 20px;
-        }
-        .logo-area {
-            display: flex;
             align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: inherit;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(46, 125, 200, 0.3);
         }
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 800;
-            color: #fff;
+        .logo-area h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #C0E0FF, #7C9BFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             letter-spacing: -0.5px;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(139, 94, 43, 0.25);
         }
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text);
-            letter-spacing: -0.3px;
-        }
-        .logo-text span {
-            color: var(--gold-dark);
-        }
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            position: relative;
-            padding: 4px 0;
-        }
-        .nav-links a:hover {
-            color: var(--text);
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .btn-join {
-            background: var(--blue);
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 50px;
-            font-weight: 600;
+        .logo-area p {
             font-size: 0.9rem;
-            text-decoration: none;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            letter-spacing: 0.2px;
-            box-shadow: 0 2px 10px rgba(30, 58, 95, 0.2);
-            white-space: nowrap;
+            color: #9AA9C9;
+            margin-top: 0.25rem;
         }
-        .btn-join:hover {
-            background: var(--blue-dark);
-            box-shadow: 0 4px 18px rgba(30, 58, 95, 0.3);
-            transform: translateY(-1px);
-        }
-        .btn-join:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.25);
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 70px 24px 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        /* Диагональный акцент на фоне */
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(200, 150, 62, 0.12) 0%, transparent 70%);
-            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-            z-index: 0;
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--surface-alt);
-            color: var(--gold-dark);
-            font-weight: 600;
+        .badge {
+            background: rgba(30, 60, 110, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
             font-size: 0.85rem;
-            padding: 6px 16px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-            margin-bottom: 18px;
-            border: 1px solid var(--border);
-            position: relative;
-            z-index: 1;
-        }
-        .hero-badge .material-symbols-rounded {
-            font-size: 1.1rem;
-            color: var(--gold);
-        }
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.15;
-            margin-bottom: 12px;
-            color: var(--text);
-            position: relative;
-            z-index: 1;
-        }
-        .hero h1 .accent {
-            color: var(--gold-dark);
-            position: relative;
-        }
-        .tag-display {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            z-index: 1;
-            transition: var(--transition);
-        }
-        .tag-display .copy-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            padding: 4px 8px;
-            border-radius: 6px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-        }
-        .tag-display .copy-btn:hover {
-            background: var(--surface-alt);
-            color: var(--text);
-        }
-        .copy-tooltip {
-            font-size: 0.75rem;
-            color: var(--gold-dark);
             font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s;
-            margin-left: 4px;
+            border: 1px solid rgba(72, 187, 255, 0.4);
+            color: #B9E2FF;
         }
-        .copy-tooltip.show {
-            opacity: 1;
-        }
-        .hero p.subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 16px auto 0;
-            font-weight: 400;
-            position: relative;
-            z-index: 1;
+        .badge i {
+            margin-right: 0.4rem;
+            color: #3E9CFF;
         }
 
-        /* ========== SECTIONS ========== */
-        .section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px 60px;
-            position: relative;
-        }
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 24px;
-            letter-spacing: -0.3px;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-
-        /* ========== ДИАГОНАЛЬНЫЕ ВЫРЕЗЫ ========== */
-        .card,
-        .leader-card,
-        .cta-box {
-            clip-path: polygon(0 0, calc(100% - var(--diagonal-cut)) 0, 100% var(--diagonal-cut), 100% 100%, 0 100%);
-            background: var(--surface);
-            /* Тень через filter для корректного отображения с clip-path */
-            filter: drop-shadow(0 4px 14px rgba(44, 36, 22, 0.08));
-            transition: var(--transition);
-        }
-        .card:hover,
-        .leader-card:hover,
-        .cta-box:hover {
-            filter: drop-shadow(0 8px 22px rgba(44, 36, 22, 0.14));
-            transform: translateY(-2px);
-        }
-        .card,
-        .leader-card {
-            padding: 24px 22px;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-box {
-            padding: 40px 30px;
-        }
-
-        /* ========== INFO CARDS ========== */
-        .card-grid {
+        /* Сетка карточек */
+        .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2rem;
+        }
+
+        /* Карточка инструмента */
+        .tool-card {
+            background: rgba(18, 22, 40, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(66, 122, 191, 0.3);
+            border-radius: 28px;
+            padding: 1.5rem 1.6rem;
+            transition: all 0.25s ease-in-out;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #3E7EC6;
+            box-shadow: 0 20px 35px -12px rgba(0, 120, 255, 0.25);
+            background: rgba(22, 28, 50, 0.85);
         }
         .card-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 14px;
+            font-size: 2.2rem;
+            color: #5CA6FF;
+            margin-bottom: 1rem;
         }
-        .card-icon.trophy {
-            background: #fdf3e0;
-            color: var(--gold-dark);
-        }
-        .card-icon.type {
-            background: #e8edf5;
-            color: var(--blue);
-        }
-        .card-icon.lang {
-            background: #f0ebe0;
-            color: #6b5e4a;
-        }
-        .card-icon.active {
-            background: #fce8e6;
-            color: var(--red-accent);
-        }
-        .card-icon .material-symbols-rounded {
-            font-size: 1.6rem;
-        }
-        .card h3 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
+        .tool-card h3 {
+            font-size: 1.5rem;
             font-weight: 600;
-        }
-        .card .value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.3px;
-        }
-        .card .sub-value {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        /* ========== LEADERSHIP ========== */
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .leader-card {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .leader-card.president {
-            border-left: 4px solid var(--gold);
-        }
-        .leader-card.veteran {
-            border-left: 4px solid var(--blue-light);
-        }
-        .leader-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #fff;
-        }
-        .leader-avatar.pres {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-        }
-        .leader-avatar.vet {
-            background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue-dark) 100%);
-        }
-        .leader-info .role {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-        .leader-info .name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text);
+            margin-bottom: 0.5rem;
             letter-spacing: -0.2px;
         }
-        .badge-role {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 50px;
-            margin-top: 4px;
-            letter-spacing: 0.4px;
+        .tool-desc {
+            font-size: 0.85rem;
+            color: #AEB9DA;
+            margin-bottom: 1.3rem;
+            border-left: 2px solid #2F6EB0;
+            padding-left: 0.7rem;
         }
-        .badge-president {
-            background: #fdf3e0;
-            color: var(--gold-dark);
-        }
-        .badge-veteran {
-            background: #e8edf5;
-            color: var(--blue-dark);
-        }
-
-        /* ========== REQUIREMENTS ========== */
-        .req-list {
-            list-style: none;
+        .tool-input-area {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
         }
-        .req-list li {
+        .flex-row {
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
             align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text);
-            padding: 14px 18px;
-            background: var(--surface);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
         }
-        .req-list li:hover {
-            box-shadow: var(--shadow-md);
+        input, select, .output-block {
+            font-family: 'Inter', monospace;
+            background: #0C0F1C;
+            border: 1px solid #2C3D5C;
+            border-radius: 16px;
+            padding: 0.7rem 1rem;
+            color: #F0F5FF;
+            font-size: 0.9rem;
+            transition: 0.2s;
         }
-        .req-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
+        input:focus, select:focus {
+            outline: none;
+            border-color: #5CA6FF;
+            box-shadow: 0 0 0 2px rgba(92, 166, 255, 0.2);
         }
-        .req-icon.check {
-            background: #e6f0e6;
-            color: #3a7d3a;
-        }
-        .req-icon.star {
-            background: #fdf3e0;
-            color: var(--gold-dark);
-        }
-        .req-icon.msg {
-            background: #e8edf5;
-            color: var(--blue);
-        }
-        .req-icon .material-symbols-rounded {
-            font-size: 1.2rem;
-        }
-
-        /* ========== CTA ========== */
-        .cta-section {
-            text-align: center;
-            padding: 40px 24px 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .cta-box {
-            display: inline-block;
-            max-width: 500px;
-            width: 100%;
-        }
-        .cta-box h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-        .cta-box p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        .btn-join-large {
-            display: inline-block;
-            background: var(--blue);
-            color: #fff;
-            padding: 14px 36px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: var(--transition);
-            letter-spacing: 0.3px;
-            box-shadow: 0 3px 14px rgba(30, 58, 95, 0.25);
-            cursor: pointer;
+        button {
+            background: linear-gradient(105deg, #1B3B5C, #10273F);
             border: none;
-        }
-        .btn-join-large:hover {
-            background: var(--blue-dark);
-            box-shadow: 0 6px 22px rgba(30, 58, 95, 0.35);
-            transform: translateY(-2px);
-        }
-        .tag-bottom {
-            margin-top: 16px;
+            padding: 0.65rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.5px;
-            font-weight: 500;
+            color: #EAF3FF;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(84, 157, 255, 0.4);
         }
-
-        /* ========== FOOTER ========== */
-        .footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-            max-width: 1100px;
-            margin: 0 auto;
+        button i {
+            font-size: 0.9rem;
         }
-        .footer .disclaimer {
-            opacity: 0.7;
+        button:hover {
+            background: #1F4970;
+            border-color: #6CAAFF;
+            transform: scale(0.97);
+            box-shadow: 0 5px 12px rgba(0, 100, 255, 0.2);
+        }
+        .output-wrapper {
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 20px;
+            padding: 0.7rem 1rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            word-break: break-all;
+            border: 1px solid #2C3D5C;
+        }
+        .output-text {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #C7DFFF;
+            flex: 1;
+        }
+        .copy-btn {
+            background: none;
+            border: 1px solid #3F618C;
+            padding: 0.3rem 0.8rem;
             font-size: 0.75rem;
+            gap: 0.3rem;
+        }
+        .copy-btn:hover {
+            background: #2C4A6E;
+            transform: none;
+        }
+        hr {
+            margin: 0.3rem 0;
+            border-color: #203652;
+        }
+        .status-valid {
+            color: #86EFAC;
+        }
+        .status-invalid {
+            color: #FFA69E;
         }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .header-inner {
-                padding: 10px 16px;
-                gap: 12px;
-            }
-            .nav-links {
-                gap: 14px;
-            }
-            .nav-links a {
-                font-size: 0.8rem;
-            }
-            .btn-join {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-            .logo-text {
-                font-size: 1rem;
-            }
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-            .hero {
-                padding: 40px 16px 30px;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .section {
-                padding: 0 16px 40px;
-            }
-            .card-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .leadership-grid {
-                grid-template-columns: 1fr;
-            }
-            .cta-box {
-                padding: 28px 20px;
-            }
+        /* футер */
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(72, 120, 184, 0.25);
+            font-size: 0.85rem;
+            color: #7E8CB0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        @media (max-width: 480px) {
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-links {
-                display: none;
-            }
-            .header-inner {
-                justify-content: space-between;
-            }
-            .btn-join {
-                font-size: 0.75rem;
-                padding: 7px 14px;
-            }
+        .footer a {
+            color: #8AADF0;
+            text-decoration: none;
         }
 
-        /* ========== ANIMATIONS ========== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
+        /* toast уведомление */
+        #toast-message {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1F334F;
+            backdrop-filter: blur(12px);
+            border-left: 4px solid #5CA6FF;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .tools-grid {
+                gap: 1.2rem;
             }
-        }
-        .animate-in {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        .delay-1 {
-            animation-delay: 0.1s;
-            opacity: 0;
-        }
-        .delay-2 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-        .delay-3 {
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-        .delay-4 {
-            animation-delay: 0.4s;
-            opacity: 0;
+            .tool-card {
+                padding: 1.2rem;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header-inner">
-            <a href="#" class="logo-area">
-                <div class="logo-icon">GS</div>
-                <span class="logo-text">Gavans <span>Squad</span></span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#info">О клубе</a></li>
-                <li><a href="#leaders">Состав</a></li>
-                <li><a href="#reqs">Правила</a></li>
-            </ul>
-            <a href="#join" class="btn-join">Вступить</a>
+<div class="container">
+    <div class="header">
+        <div class="logo-area">
+            <h1><i class="fas fa-cube"></i> WesDes</h1>
+            <p>инструментарий для профессионалов Minecraft серверов</p>
         </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero animate-in" id="hero">
-        <span class="hero-badge">
-            <span class="material-symbols-rounded">emoji_events</span> Brawl Stars Club
-        </span>
-        <h1>Добро пожаловать в <span class="accent">Gavans Squad</span></h1>
-        <div class="tag-display">
-            Тег: <strong class="tag-text">#CCQL9VPG</strong>
-            <button class="copy-btn" onclick="copyTag()" title="Скопировать тег">
-                <span class="material-symbols-rounded">content_copy</span>
-            </button>
-            <span class="copy-tooltip" id="copyTooltip">Скопировано!</span>
+        <div class="badge">
+            <i class="fas fa-code-branch"></i> dev tools v2.0
         </div>
-        <p class="subtitle">Активный и дружный клуб для игроков, которые любят Brawl Stars и хотят побеждать вместе.</p>
-    </section>
+    </div>
 
-    <!-- INFO CARDS -->
-    <section class="section animate-in delay-1" id="info">
-        <h2 class="section-title">Информация о клубе</h2>
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-icon trophy">
-                    <span class="material-symbols-rounded">emoji_events</span>
+    <div class="tools-grid">
+        <!-- 1. UUID Generator -->
+        <div class="tool-card" id="card-uuid">
+            <div class="card-icon"><i class="fas fa-fingerprint"></i></div>
+            <h3>UUID v4 Генератор</h3>
+            <div class="tool-desc">Уникальный идентификатор для плагинов, игроков и датабаз.</div>
+            <div class="tool-input-area">
+                <div class="flex-row">
+                    <button id="genUUIDBtn"><i class="fas fa-sync-alt"></i> Сгенерировать</button>
                 </div>
-                <h3>Трофеи для входа</h3>
-                <div class="value">1 000</div>
-                <div class="sub-value">Минимальный порог</div>
-            </div>
-            <div class="card">
-                <div class="card-icon type">
-                    <span class="material-symbols-rounded">lock_open</span>
-                </div>
-                <h3>Тип клуба</h3>
-                <div class="value">Открытый</div>
-                <div class="sub-value">Свободный вход</div>
-            </div>
-            <div class="card">
-                <div class="card-icon lang">
-                    <span class="material-symbols-rounded">public</span>
-                </div>
-                <h3>Язык общения</h3>
-                <div class="value">Русский</div>
-                <div class="sub-value">Родной язык</div>
-            </div>
-            <div class="card">
-                <div class="card-icon active">
-                    <span class="material-symbols-rounded">bolt</span>
-                </div>
-                <h3>Главное требование</h3>
-                <div class="value">Активность</div>
-                <div class="sub-value">Быть в игре регулярно</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LEADERSHIP -->
-    <section class="section animate-in delay-2" id="leaders">
-        <h2 class="section-title">Руководство клуба</h2>
-        <div class="leadership-grid">
-            <div class="leader-card president">
-                <div class="leader-avatar pres">A</div>
-                <div class="leader-info">
-                    <span class="role">Президент · Главный</span>
-                    <div class="name">AnskillMer</div>
-                    <span class="badge-role badge-president">👑 Лидер клуба</span>
-                </div>
-            </div>
-            <div class="leader-card veteran">
-                <div class="leader-avatar vet">S</div>
-                <div class="leader-info">
-                    <span class="role">Ветеран</span>
-                    <div class="name">SIPER-GEIZ</div>
-                    <span class="badge-role badge-veteran">⭐ Опытный игрок</span>
+                <div class="output-wrapper">
+                    <span class="output-text" id="uuidResult">00000000-0000-0000-0000-000000000000</span>
+                    <button class="copy-btn" data-copy-target="uuidResult"><i class="far fa-copy"></i> Копировать</button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- REQUIREMENTS -->
-    <section class="section animate-in delay-3" id="reqs">
-        <h2 class="section-title">Требования и правила</h2>
-        <ul class="req-list">
-            <li>
-                <span class="req-icon check">
-                    <span class="material-symbols-rounded">check_circle</span>
-                </span>
-                <span><strong>Быть активным</strong> — заходить в игру регулярно, участвовать в жизни клуба.</span>
-            </li>
-            <li>
-                <span class="req-icon star">
-                    <span class="material-symbols-rounded">star</span>
-                </span>
-                <span><strong>Иметь 1000+ трофеев</strong> — минимальный порог для вступления в клуб.</span>
-            </li>
-            <li>
-                <span class="req-icon msg">
-                    <span class="material-symbols-rounded">chat</span>
-                </span>
-                <span><strong>Общаться на русском языке</strong> — чат клуба ведётся на русском.</span>
-            </li>
-            <li>
-                <span class="req-icon check">
-                    <span class="material-symbols-rounded">handshake</span>
-                </span>
-                <span><strong>Уважать сокомандников</strong> — никакого токсичного поведения, мы за дружную игру.</span>
-            </li>
-            <li>
-                <span class="req-icon star">
-                    <span class="material-symbols-rounded">track_changes</span>
-                </span>
-                <span><strong>Стремиться к победам</strong> — вместе мы сильнее, помогаем друг другу в рейтинговых боях.</span>
-            </li>
-        </ul>
-    </section>
-
-    <!-- CTA / JOIN -->
-    <section class="cta-section animate-in delay-4" id="join">
-        <div class="cta-box">
-            <h2>Присоединяйся к Gavans Squad!</h2>
-            <p>Мы ждём активных игроков с 1000+ трофеев. Вступай в открытый клуб прямо сейчас.</p>
-            <button class="btn-join-large" onclick="copyTag()">
-                Скопировать тег #CCQL9VPG
-            </button>
-            <p class="tag-bottom">Или найди нас в Brawl Stars по тегу <strong>#CCQL9VPG</strong></p>
+        <!-- 2. Конвертер тиков в реальное время -->
+        <div class="tool-card">
+            <div class="card-icon"><i class="fas fa-clock"></i></div>
+            <h3>Тики → Время</h3>
+            <div class="tool-desc">Перевод тиков сервера в секунды/минуты/часы.</div>
+            <div class="tool-input-area">
+                <div class="flex-row">
+                    <input type="number" id="ticksInput" value="2400" step="1" placeholder="Количество тиков">
+                    <button id="convertTicksBtn"><i class="fas fa-chart-line"></i> Конверт</button>
+                </div>
+                <div class="output-wrapper">
+                    <span class="output-text" id="ticksResult">2400 тиков = 120.0 сек (2.0 мин / 0.03 ч)</span>
+                    <button class="copy-btn" data-copy-target="ticksResult"><i class="far fa-copy"></i> Копировать</button>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>Gavans Squad &copy; 2025 — Клуб Brawl Stars</p>
-        <p class="disclaimer">Этот сайт не является официальным ресурсом Supercell. Brawl Stars — товарный знак Supercell Oy.</p>
-    </footer>
+        <!-- 3. Генератор команды /give -->
+        <div class="tool-card">
+            <div class="card-icon"><i class="fas fa-gift"></i></div>
+            <h3>/give команда</h3>
+            <div class="tool-desc">Генерация предметной команды для игроков.</div>
+            <div class="tool-input-area">
+                <div class="flex-row">
+                    <select id="itemSelect">
+                        <option value="diamond_sword">Алмазный меч</option>
+                        <option value="stick">Палка</option>
+                        <option value="command_block">Командный блок</option>
+                        <option value="golden_apple">Золотое яблоко</option>
+                        <option value="ender_pearl">Жемчуг Края</option>
+                    </select>
+                    <input type="number" id="itemAmount" value="1" min="1" max="64" style="width: 80px;">
+                </div>
+                <button id="generateGiveBtn"><i class="fas fa-hammer"></i> Создать команду</button>
+                <div class="output-wrapper">
+                    <span class="output-text" id="giveResult">/give @p minecraft:diamond_sword 1</span>
+                    <button class="copy-btn" data-copy-target="giveResult"><i class="far fa-copy"></i> Копировать</button>
+                </div>
+            </div>
+        </div>
 
-    <script>
-        // Копирование тега в буфер обмена
-        function copyTag() {
-            const tag = '#CCQL9VPG';
-            navigator.clipboard.writeText(tag).then(() => {
-                const tooltip = document.getElementById('copyTooltip');
-                tooltip.classList.add('show');
-                setTimeout(() => {
-                    tooltip.classList.remove('show');
-                }, 1800);
-            }).catch(() => {
-                // Фолбэк для старых браузеров
-                const textArea = document.createElement('textarea');
-                textArea.value = tag;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-9999px';
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                const tooltip = document.getElementById('copyTooltip');
-                tooltip.classList.add('show');
-                setTimeout(() => {
-                    tooltip.classList.remove('show');
-                }, 1800);
+        <!-- 4. Генератор Seed (мир) -->
+        <div class="tool-card">
+            <div class="card-icon"><i class="fas fa-dice-d6"></i></div>
+            <h3>Генератор Seed</h3>
+            <div class="tool-desc">Случайное число для генерации миров Minecraft.</div>
+            <div class="tool-input-area">
+                <button id="genSeedBtn"><i class="fas fa-random"></i> Создать Seed</button>
+                <div class="output-wrapper">
+                    <span class="output-text" id="seedResult">-289478521034</span>
+                    <button class="copy-btn" data-copy-target="seedResult"><i class="far fa-copy"></i> Копировать</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Валидатор адреса сервера IP:PORT -->
+        <div class="tool-card">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Валидатор адреса</h3>
+            <div class="tool-desc">Проверка формата IP/домен:порт для конфигов сервера.</div>
+            <div class="tool-input-area">
+                <div class="flex-row">
+                    <input type="text" id="serverAddress" placeholder="mc.example.com:25565" value="play.hypixel.net:25565">
+                    <button id="validateAddrBtn"><i class="fas fa-check-double"></i> Проверить</button>
+                </div>
+                <div class="output-wrapper">
+                    <span class="output-text" id="addrResult">✅ Валидный адрес</span>
+                    <button class="copy-btn" data-copy-target="addrResult"><i class="far fa-copy"></i> Копировать</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Калькулятор чанка по координатам -->
+        <div class="tool-card">
+            <div class="card-icon"><i class="fas fa-map"></i></div>
+            <h3>Координаты → Чанк</h3>
+            <div class="tool-desc">Вычисление чанка (X,Z) для разработки регионов.</div>
+            <div class="tool-input-area">
+                <div class="flex-row">
+                    <input type="number" id="coordX" placeholder="X" value="128">
+                    <input type="number" id="coordZ" placeholder="Z" value="-56">
+                </div>
+                <button id="calcChunkBtn"><i class="fas fa-calculator"></i> Рассчитать чанк</button>
+                <div class="output-wrapper">
+                    <span class="output-text" id="chunkResult">Чанк X: 8, Z: -4</span>
+                    <button class="copy-btn" data-copy-target="chunkResult"><i class="far fa-copy"></i> Копировать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>WesDes — профессиональные инструменты для разработчиков Minecraft серверов</span>
+        <span><i class="fas fa-crown"></i> open source ethos &nbsp;|&nbsp; <a href="#"><i class="fab fa-github"></i> GitHub</a></span>
+    </div>
+</div>
+<div id="toast-message">✓ Скопировано</div>
+
+<script>
+    (function() {
+        // --- Вспомогательные функции ---
+        function showToast(msg = "Скопировано в буфер") {
+            const toast = document.getElementById('toast-message');
+            toast.textContent = msg;
+            toast.style.opacity = '1';
+            toast.style.pointerEvents = 'none';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // универсальное копирование (текст из элемента)
+        function setupCopyButtons() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const targetId = btn.getAttribute('data-copy-target');
+                    if (targetId) {
+                        const sourceEl = document.getElementById(targetId);
+                        if (sourceEl) {
+                            const textToCopy = sourceEl.innerText.trim();
+                            if (textToCopy) {
+                                navigator.clipboard.writeText(textToCopy).then(() => {
+                                    showToast(`✓ Скопировано: ${textToCopy.substring(0, 45)}${textToCopy.length > 45 ? '…' : ''}`);
+                                }).catch(() => {
+                                    showToast("Не удалось скопировать");
+                                });
+                            } else {
+                                showToast("Нет данных для копирования");
+                            }
+                        }
+                    }
+                });
             });
         }
 
-        // Добавление тени при прокрутке
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                header.classList.add('scrolled');
+        // 1. UUID v4 генерация
+        function generateUUID() {
+            if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+                return crypto.randomUUID();
             } else {
-                header.classList.remove('scrolled');
+                // fallback
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    const r = Math.random() * 16 | 0;
+                    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
             }
-        });
-
-        // Анимация появления при скролле
-        const animatedElements = document.querySelectorAll('.animate-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, { threshold: 0.15 });
-
-        animatedElements.forEach(el => {
-            observer.observe(el);
-            el.style.animationPlayState = 'running';
-        });
-    </script>
+        }
+        function updateUUID() {
+            const uuidSpan = document.getElementById('uuidResult');
+            if (uuidSpan) uuidSpan.innerText = generateUUID();
+        }
+        
+        // 2. Конвертер тиков
+        function convertTicks(ticks) {
+            const seconds = ticks / 20;
+            const minutes = seconds / 60;
+            const hours = minutes / 60;
+            return { seconds, minutes, hours };
+        }
+        function formatTicksOutput(ticks) {
+            if (isNaN(ticks) || ticks < 0) return "Введите корректное число тиков";
+            const { seconds, minutes, hours } = convertTicks(ticks);
+            return `${ticks} тиков = ${seconds.toFixed(2)} сек (${minutes.toFixed(2)} мин / ${hours.toFixed(3)} ч)`;
+        }
+        function updateTicksResult() {
+            const inputVal = document.getElementById('ticksInput').value;
+            const ticks = parseInt(inputVal, 10);
+            const resultSpan = document.getElementById('ticksResult');
+            if (isNaN(ticks)) {
+                resultSpan.innerText = "Ошибка: введите число";
+            } else {
+                resultSpan.innerText = formatTicksOutput(ticks);
+            }
+        }
+        
+        // 3. /give команда
+        function updateGiveCommand() {
+            const item = document.getElementById('itemSelect').value;
+            let amount = parseInt(document.getElementById('itemAmount').value, 10);
+            if (isNaN(amount) || amount < 1) amount = 1;
+            if (amount > 64) amount = 64;
+            const cmd = `/give @p minecraft:${item} ${amount}`;
+            document.getElementById('giveResult').innerText = cmd;
+        }
+        
+        // 4. Генератор Seed (диапазон -2^53+1 до 2^53-1)
+        function randomSeed() {
+            const maxSafe = Number.MAX_SAFE_INTEGER; // 9e15
+            const minSafe = -Number.MAX_SAFE_INTEGER;
+            const seed = Math.floor(Math.random() * (maxSafe - minSafe + 1) + minSafe);
+            return seed;
+        }
+        function updateSeed() {
+            const seedSpan = document.getElementById('seedResult');
+            seedSpan.innerText = randomSeed();
+        }
+        
+        // 5. Валидатор адреса (ip/domain:port)
+        function validateServerAddress(address) {
+            if (!address || address.trim() === "") return false;
+            const lastColonIndex = address.lastIndexOf(':');
+            if (lastColonIndex === -1) return false;
+            const hostPart = address.substring(0, lastColonIndex);
+            const portPart = address.substring(lastColonIndex + 1);
+            if (!hostPart || hostPart.length === 0) return false;
+            const portNum = parseInt(portPart, 10);
+            if (isNaN(portNum) || portNum < 1 || portNum > 65535) return false;
+            // простая проверка хоста (не пустой, базовые символы)
+            const hostRegex = /^[a-zA-Z0-9.-]+$/;
+            const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+            const isValidHost = hostRegex.test(hostPart) || ipRegex.test(hostPart);
+            if (!isValidHost && hostPart !== "localhost") return false;
+            return true;
+        }
+        function updateValidator() {
+            const addrInput = document.getElementById('serverAddress').value;
+            const isValid = validateServerAddress(addrInput);
+            const resultSpan = document.getElementById('addrResult');
+            if (isValid) {
+                resultSpan.innerHTML = `✅ Валидный адрес: ${addrInput}`;
+                resultSpan.style.color = "#86EFAC";
+            } else {
+                resultSpan.innerHTML = `❌ Невалидный формат. Пример: domain.com:25565`;
+                resultSpan.style.color = "#FFA69E";
+            }
+        }
+        
+        // 6. Калькулятор чанка
+        function calculateChunk(x, z) {
+            if (isNaN(x) || isNaN(z)) return null;
+            const chunkX = Math.floor(x / 16);
+            const chunkZ = Math.floor(z / 16);
+            return { chunkX, chunkZ };
+        }
+        function updateChunkResult() {
+            let rawX = document.getElementById('coordX').value;
+            let rawZ = document.getElementById('coordZ').value;
+            let x = parseFloat(rawX);
+            let z = parseFloat(rawZ);
+            const resultSpan = document.getElementById('chunkResult');
+            if (isNaN(x) || isNaN(z)) {
+                resultSpan.innerText = "Ошибка: введите числовые координаты";
+                return;
+            }
+            const { chunkX, chunkZ } = calculateChunk(x, z);
+            resultSpan.innerText = `Чанк X: ${chunkX}, Z: ${chunkZ}  (координаты блока: ${Math.floor(x)}, ${Math.floor(z)})`;
+        }
+        
+        // инициализация всех событий и загрузка данных по умолчанию
+        function initTools() {
+            // UUID
+            const genBtn = document.getElementById('genUUIDBtn');
+            if (genBtn) genBtn.addEventListener('click', updateUUID);
+            updateUUID();
+            
+            // Ticks
+            const ticksBtn = document.getElementById('convertTicksBtn');
+            if (ticksBtn) ticksBtn.addEventListener('click', updateTicksResult);
+            document.getElementById('ticksInput')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') updateTicksResult(); });
+            updateTicksResult();
+            
+            // /give
+            const giveBtn = document.getElementById('generateGiveBtn');
+            if (giveBtn) giveBtn.addEventListener('click', updateGiveCommand);
+            document.getElementById('itemAmount')?.addEventListener('change', updateGiveCommand);
+            document.getElementById('itemSelect')?.addEventListener('change', updateGiveCommand);
+            updateGiveCommand();
+            
+            // Seed
+            const seedBtn = document.getElementById('genSeedBtn');
+            if (seedBtn) seedBtn.addEventListener('click', updateSeed);
+            updateSeed();
+            
+            // Валидатор адреса
+            const validateBtn = document.getElementById('validateAddrBtn');
+            if (validateBtn) validateBtn.addEventListener('click', updateValidator);
+            document.getElementById('serverAddress')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') updateValidator(); });
+            updateValidator();
+            
+            // Калькулятор чанка
+            const chunkBtn = document.getElementById('calcChunkBtn');
+            if (chunkBtn) chunkBtn.addEventListener('click', updateChunkResult);
+            document.getElementById('coordX')?.addEventListener('change', updateChunkResult);
+            document.getElementById('coordZ')?.addEventListener('change', updateChunkResult);
+            updateChunkResult();
+            
+            // Настройка копирования для всех динамических элементов (кнопки копирования)
+            setupCopyButtons();
+            
+            // Дополнительно: обновим копирование если в будущем меняется текст (не требуется, кнопки уже привязаны)
+            // при изменении результатов через js кнопки копирования остаются рабочими
+        }
+        
+        // чтобы копирование подхватило новые элементы, если бы они динамически создавались - но все статичны, но setupCopyButtons уже проходится.
+        // Так как кнопки все уже существуют, достаточно.
+        // дополнительно добавим наблюдатель? не нужно, всё готово.
+        // но чтобы при любом вызове генерации текст обновляется, а кнопки копирования имеют актуальный data-copy-target.
+        document.addEventListener('DOMContentLoaded', initTools);
+    })();
+</script>
 </body>
 </html>
